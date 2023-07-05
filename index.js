@@ -3,11 +3,6 @@ AWS.config.update({
   secretAccessKey: "aq3L2Q/Ej59dw5qKqEIclk5DDevd12TjgkWsITOL",
   region: "ap-southeast-1",
 });
-AWS.config.update({
-  accessKeyId: "AKIAYVSXMH3MMFQWV6V2",
-  secretAccessKey: "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",
-  region: "ap-southeast-1",
-});
 document.getElementById("form").addEventListener("submit", submitForm);
 
 function submitForm(event) {
