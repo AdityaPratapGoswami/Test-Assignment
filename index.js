@@ -1,55 +1,55 @@
 AWS.config.update({
+  region: "ap-southeast-1",
   accessKeyId: "AKIAYVSXMH3MMFQWV6V2",
   secretAccessKey: "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",
-  region: "ap-southeast-1",
 });
-document.getElementById("form").addEventListener("submit", submitForm);
 
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+// Function to handle form submission
 function submitForm(event) {
   event.preventDefault();
 
-  // Get form field values
-  const firstName = document.getElementById("firstname").value;
-  const lastName = document.getElementById("lastname").value;
-  const email = document.getElementById("inputEmail4").value;
-  const address = document.getElementById("inputAddress").value;
-  const city = document.getElementById("inputCity").value;
-  const state = document.getElementById("inputState").value;
-  const country = document.getElementById("inputCountry").value;
-  const zip = document.getElementById("inputZip").value;
+  // Retrieve form field values
+  var firstName = document.getElementById("firstname").value;
+  var lastName = document.getElementById("lastname").value;
+  var email = document.getElementById("inputEmail4").value;
+  var address = document.getElementById("inputAddress").value;
+  var city = document.getElementById("inputCity").value;
+  var state = document.getElementById("inputState").value;
+  var zip = document.getElementById("inputZip").value;
 
-  // object with the form data
-  const formData = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    address: address,
-    city: city,
-    state: state,
-    country: country,
-    zip: zip,
+  // JavaScript object representing the item to be saved
+  var item = {
+    FirstName: firstName,
+    LastName: lastName,
+    Email: email,
+    Address: address,
+    City: city,
+    State: state,
+    Zip: zip,
   };
 
-  // Send the form data to the server (or DynamoDB)
-  saveFormData(formData);
-}
+  // Define the DynamoDB table name
+  var tableName = "FormData";
 
-function saveFormData(formData) {
-  const dynamodb = new AWS.DynamoDB.DocumentClient({
-    region: "ap-southeast-1",
-  });
-
-  const params = {
-    TableName: "FormData",
-    Item: formData,
+  // Configure the parameters for the DynamoDB Put operation
+  var params = {
+    TableName: FormData,
+    Item: item,
   };
 
-  dynamodb.put(params, (err, data) => {
+  // Call the DynamoDB Put operation to save the item
+  docClient.put(params, function (err, data) {
     if (err) {
-      console.error("Error storing form data:", err);
+      console.error("Error submitting form:", err);
+      // Handle the error
     } else {
-      console.log("Form data stored successfully:", data);
-      // Optionally, redirect to a success page or perform other actions
+      console.log("Form submitted successfully:", data);
+      // Handle the success
     }
   });
 }
+
+var form = document.getElementById("form");
+form.addEventListener("submit", submitForm);
