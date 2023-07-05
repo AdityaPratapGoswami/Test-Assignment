@@ -1,0 +1,13 @@
+.container {
+  margin-top: 40px;
+}
+
+.semi-circle {
+  height: 180px;
+  background-color: navy;
+  border-radius: 0 0 50% 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
