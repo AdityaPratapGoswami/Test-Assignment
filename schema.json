@@ -1,7 +1,10 @@
 {
   "type": "object",
   "properties": {
-    "name": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
       "type": "string"
     },
     "email": {
